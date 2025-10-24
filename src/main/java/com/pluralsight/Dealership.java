@@ -16,6 +16,7 @@ public class Dealership {
         this.inventory = new ArrayList<>();
     }
 
+
     public String getName() {
         return name;
     }
@@ -90,4 +91,16 @@ public class Dealership {
     public ArrayList<Vehicle> getVehiclesByType(String vehicleType){
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "Dealership{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", phone='" + phone + '\'' +
+                ", inventory=" + inventory +
+                '}';
+    }
 }
+
+

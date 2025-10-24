@@ -6,30 +6,26 @@ import java.util.ArrayList;
 
 public class DealershipFileManager {
 
-    public Dealership getDealerShipFromFile() {
-        ArrayList<Dealership> arrayList = new ArrayList<>();
+    public static Dealership getDealerShipFromFile() {
 
+        Dealership dealership = null;
         try {
             FileReader fileReader = new FileReader("inventory.csv");
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            bufferedReader.readLine();
 
-//            private String name;
-//            private String address;
-//            private String phone;
-           //dealership
-
+            /* Dealership */
             String dealerLine = bufferedReader.readLine();
-            String[] dealer_part =  dealerLine.split("\\|");
+            String[] dealer_part = dealerLine.split("\\|");
 
             String name = dealer_part[0];
             String address = dealer_part[1];
             String phone = dealer_part[2];
 
-            Dealership dealership = new Dealership(name, address, phone);
+            dealership = new Dealership(name, address, phone);
 
             String line;
-            while((line = bufferedReader.readLine()) != null){
+            while ((line = bufferedReader.readLine()) != null) {
+                /* vehicle */
                 String[] vehicle_part = line.trim().split("\\|");
 
                 int vin = Integer.parseInt(vehicle_part[0]);
@@ -47,12 +43,15 @@ public class DealershipFileManager {
 
             }
 
+            bufferedReader.close();
+            fileReader.close();
+
         } catch (Exception e) {
             System.out.println("Error!");
+            e.printStackTrace();
         }
 
-
-        return null;
+        return dealership;
     }
 
     public void saveDealership(Dealership dealership){

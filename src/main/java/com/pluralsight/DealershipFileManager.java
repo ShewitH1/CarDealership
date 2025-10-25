@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class DealershipFileManager {
 
-    public static Dealership getDealerShipFromFile() {
+    public Dealership getDealerShipFromFile() {
 
         Dealership dealership = null;
         try {

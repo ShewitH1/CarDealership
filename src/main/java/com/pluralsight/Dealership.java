@@ -16,6 +16,10 @@ public class Dealership {
         this.inventory = new ArrayList<>();
     }
 
+    public Dealership() {
+
+    }
+
 
     public String getName() {
         return name;

@@ -6,7 +6,12 @@ public class Main {
     public static void main(String[] args) {
 
         //just for testing
-        System.out.println(DealershipFileManager.getDealerShipFromFile());
+//        System.out.println(DealershipFileManager.getDealerShipFromFile());
+
+        UserInterface u = new UserInterface();
+        u.display();
+
+
 
     }
 }

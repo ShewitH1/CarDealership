@@ -131,6 +131,7 @@ public class UserInterface {
         }
     }
 
+    //stores all the data in the ArrayList: inventory
     public void processGetAllVehicleRequest(){
         //will work since you are calling the object with the data
         displayVehicles(dealership.getAllVehicles());

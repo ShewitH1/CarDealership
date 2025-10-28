@@ -102,26 +102,45 @@ public class UserInterface {
     }
 
     public void processGetByPriceRequest(){
+        double min = ConsoleHelper.promptForDouble("Enter you minimum value for your price: ");
+        double max = ConsoleHelper.promptForDouble("Enter you maximum value for your price: ");
+
+        dealership.getVehiclesByPrice(min, max);
 
     }
 
     public void processGetByMakeModelRequest(){
+        String make = ConsoleHelper.promptForString("Enter make: ");
+        String model = ConsoleHelper.promptForString("Enter Model: ");
+
+        dealership.getVehiclesByMakeModel(make,model);
 
     }
 
     public void processGetByYearRequest(){
+        int min = ConsoleHelper.promptForInt("Enter min year: ");
+        int max = ConsoleHelper.promptForInt("Enter max year: ");
 
+        dealership.getVehiclesByYear(min, max);
     }
 
     public void processGetByColorRequest(){
-
+        String vehicle_color = ConsoleHelper.promptForString("Enter vehicle color: ");
+        dealership.getVehiclesByColor(vehicle_color);
     }
 
     public void processGetByMileageRequest(){
+        int min = ConsoleHelper.promptForInt("Enter mileage min: ");
+        int max = ConsoleHelper.promptForInt("Enter mileage max: ");
+
+        dealership.getVehiclesByMileage(min, max);
 
     }
 
     public void processGetByVehicleTypeRequest(){
+        String vehicle_type = ConsoleHelper.promptForString("Enter vehicle type: ");
+
+        dealership.getVehiclesByType(vehicle_type);
 
     }
 

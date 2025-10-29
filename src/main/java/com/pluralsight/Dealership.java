@@ -149,14 +149,22 @@ public class Dealership {
         return type_vehicle;
     }
 
+//    @Override
+//    public String toString() {
+//        return "Dealership{" +
+//                "name='" + name + '\'' +
+//                ", address='" + address + '\'' +
+//                ", phone='" + phone + '\'' +
+//                ", inventory=" + inventory +
+//                '}';
+//    }
+
     @Override
     public String toString() {
-        return "Dealership{" +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
-                ", inventory=" + inventory +
-                '}';
+        return String.format(
+                "%-20s | %-30s | %-15s | %-10s",
+                name, address, phone, "Inventory: " + inventory
+        );
     }
 }
 

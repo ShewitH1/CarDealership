@@ -87,17 +87,25 @@ public class Vehicle {
         this.price = price;
     }
 
+//    @Override
+//    public String toString() {
+//        return "Vehicle{" +
+//                "vin=" + vin +
+//                ", year=" + year +
+//                ", make='" + make + '\'' +
+//                ", model='" + model + '\'' +
+//                ", vehicleType='" + vehicleType + '\'' +
+//                ", color='" + color + '\'' +
+//                ", odometer=" + odometer +
+//                ", price=" + price +
+//                '}';
+//    }
+
     @Override
     public String toString() {
-        return "Vehicle{" +
-                "vin=" + vin +
-                ", year=" + year +
-                ", make='" + make + '\'' +
-                ", model='" + model + '\'' +
-                ", vehicleType='" + vehicleType + '\'' +
-                ", color='" + color + '\'' +
-                ", odometer=" + odometer +
-                ", price=" + price +
-                '}';
+        return String.format(
+                "%-10s | %-6d | %-10s | %-10s | %-12s | %-10s | %-10d | $%10.2f",
+                vin, year, make, model, vehicleType, color, odometer, price
+        );
     }
 }

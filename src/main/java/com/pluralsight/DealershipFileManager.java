@@ -1,7 +1,9 @@
 package com.pluralsight;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class DealershipFileManager {
@@ -55,6 +57,49 @@ public class DealershipFileManager {
     }
 
     public void saveDealership(Dealership dealership){
+        ArrayList<Vehicle> arrayList_vehicle = dealership.getAllVehicles();
+
+        int vin = ConsoleHelper.promptForInt("Enter car vin:");
+        int year = ConsoleHelper.promptForInt("Enter specific car year: ");
+        String make = ConsoleHelper.promptForString("Enter car make: ");
+        String model = ConsoleHelper.promptForString("Enter car model: ");
+        String vehicleType = ConsoleHelper.promptForString("Enter vehicle type: ");
+        String color = ConsoleHelper.promptForString("Enter car color: ");
+        int odometer = ConsoleHelper.promptForInt("Enter the car mileage: ");
+        double price = ConsoleHelper.promptForDouble("Enter car price; ");
+
+
+        Vehicle v = new Vehicle(vin, year, make, model,vehicleType, color, odometer, price);
+
+        arrayList_vehicle.add(v);
+
+        try {
+            FileWriter fileWriter = new FileWriter("inventory.csv", true);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            //write to csv file
+            bufferedWriter.write(
+                    vin + "|" +
+                            year + "|" +
+                            make + "|" +
+                            model + "|" +
+                            vehicleType + "|" +
+                            color + "|" +
+                            odometer + "|" +
+                            price);
+
+            bufferedWriter.newLine();
+
+            bufferedWriter.close();
+            fileWriter.close();
+
+            //add this for confirmation that vehicle has been added
+            System.out.println("Your vehicle has been added successfully! Vehicle");
+
+        } catch (Exception e){
+            System.out.println("Error! Vehicle has not been added!");
+
+        }
 
     }
 }

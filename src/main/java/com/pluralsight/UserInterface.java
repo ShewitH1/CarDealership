@@ -159,6 +159,19 @@ public class UserInterface {
 
     public void processAddVehicleRequest(){
 
+//        int vin = ConsoleHelper.promptForInt("Enter car vin:");
+//        int year = ConsoleHelper.promptForInt("Enter specific car year: ");
+//        String make = ConsoleHelper.promptForString("Enter car make: ");
+//        String model = ConsoleHelper.promptForString("Enter car model: ");
+//        String vehicleType = ConsoleHelper.promptForString("Enter vehicle type: ");
+//        String color = ConsoleHelper.promptForString("Enter car color: ");
+//        int odometer = ConsoleHelper.promptForInt("Enter the car mileage: ");
+//        double price = ConsoleHelper.promptForDouble("Enter car price; ");
+
+
+        DealershipFileManager fileManager = new DealershipFileManager();
+        fileManager.saveDealership(dealership);
+
     }
 
     public void processRemoveVehicleRequest(){

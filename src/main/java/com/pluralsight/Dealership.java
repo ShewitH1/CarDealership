@@ -61,9 +61,19 @@ public class Dealership {
         }
 
 
-    public void removeVehicles(Vehicle vehicle){
-        inventory.remove(vehicle);
+    public void removeVehicles(Vehicle vehicle) {
+        int vin = ConsoleHelper.promptForInt("Enter VIN: ");
+
+        for (Vehicle inv : inventory) {
+            if (inv.getVin() == vin) {
+                inventory.remove(inv);
+                System.out.println("Vehicle removed successfully!");
+            }
+        }
+
+        System.out.println("No vehicle found with the VIN.");
     }
+
 
 
     /**

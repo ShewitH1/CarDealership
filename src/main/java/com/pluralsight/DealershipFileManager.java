@@ -59,36 +59,28 @@ public class DealershipFileManager {
     public void saveDealership(Dealership dealership){
         ArrayList<Vehicle> arrayList_vehicle = dealership.getAllVehicles();
 
-        int vin = ConsoleHelper.promptForInt("Enter car vin:");
-        int year = ConsoleHelper.promptForInt("Enter specific car year: ");
-        String make = ConsoleHelper.promptForString("Enter car make: ");
-        String model = ConsoleHelper.promptForString("Enter car model: ");
-        String vehicleType = ConsoleHelper.promptForString("Enter vehicle type: ");
-        String color = ConsoleHelper.promptForString("Enter car color: ");
-        int odometer = ConsoleHelper.promptForInt("Enter the car mileage: ");
-        double price = ConsoleHelper.promptForDouble("Enter car price; ");
-
-
-        Vehicle v = new Vehicle(vin, year, make, model,vehicleType, color, odometer, price);
-
-        arrayList_vehicle.add(v);
 
         try {
-            FileWriter fileWriter = new FileWriter("inventory.csv", true);
+            FileWriter fileWriter = new FileWriter("inventory.csv", false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            //write to csv file
-            bufferedWriter.write(
-                    vin + "|" +
-                            year + "|" +
-                            make + "|" +
-                            model + "|" +
-                            vehicleType + "|" +
-                            color + "|" +
-                            odometer + "|" +
-                            price);
+            bufferedWriter.write(dealership.getName() + "|" +
+                    dealership.getAddress() + "|" +
+                    dealership.getPhone());
+            bufferedWriter.newLine();;
 
-            bufferedWriter.newLine();
+            //write to csv file
+            for(Vehicle vehicle : dealership.getAllVehicles()){
+                bufferedWriter.write(vehicle.getVin() + "|" +
+                        vehicle.getYear() + "|" +
+                        vehicle.getMake() + "|" +
+                        vehicle.getModel() + "|" +
+                        vehicle.getVehicleType() + "|" +
+                        vehicle.getColor() + "|" +
+                        vehicle.getOdometer() + "|" +
+                        vehicle.getPrice());
+                bufferedWriter.newLine();
+            }
 
             bufferedWriter.close();
             fileWriter.close();

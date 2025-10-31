@@ -8,7 +8,7 @@ public class Dealership {
     private String address;
     private String phone;
 
-    private  ArrayList<Vehicle> inventory = new ArrayList<>();
+    private ArrayList<Vehicle> inventory = new ArrayList<>();
 
     public Dealership(String name, String address, String phone) {
         this.name = name;
@@ -61,19 +61,13 @@ public class Dealership {
         }
 
 
-    public void removeVehicles(Vehicle vehicle) {
-        int vin = ConsoleHelper.promptForInt("Enter VIN: ");
-
-        for (Vehicle inv : inventory) {
-            if (inv.getVin() == vin) {
-                inventory.remove(inv);
-                System.out.println("Vehicle removed successfully!");
+        public void removeVehicles(Vehicle vehicle) {
+            if (inventory.remove(vehicle)) {
+                System.out.println("Vehicle with VIN " + vehicle.getVin() + " removed successfully!");
+            } else {
+                System.out.println("Vehicle not found in inventory.");
             }
         }
-
-        System.out.println("No vehicle found with the VIN.");
-    }
-
 
 
     /**

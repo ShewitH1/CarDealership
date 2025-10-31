@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class UserInterface {
 
     private Dealership dealership;
+    DealershipFileManager fileManager = new DealershipFileManager();
 
 
     public UserInterface(){
@@ -158,6 +159,18 @@ public class UserInterface {
     }
 
     public void processAddVehicleRequest(){
+        int vin = ConsoleHelper.promptForInt("Enter car vin:");
+        int year = ConsoleHelper.promptForInt("Enter specific car year: ");
+        String make = ConsoleHelper.promptForString("Enter car make: ");
+        String model = ConsoleHelper.promptForString("Enter car model: ");
+        String vehicleType = ConsoleHelper.promptForString("Enter vehicle type: ");
+        String color = ConsoleHelper.promptForString("Enter car color: ");
+        int odometer = ConsoleHelper.promptForInt("Enter the car mileage: ");
+        double price = ConsoleHelper.promptForDouble("Enter car price; ");
+
+        Vehicle newVehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+        dealership.addVehicle(newVehicle);
+
 
         DealershipFileManager fileManager = new DealershipFileManager();
         fileManager.saveDealership(dealership);
@@ -166,8 +179,30 @@ public class UserInterface {
 
     public void processRemoveVehicleRequest(){
 
-        Vehicle vehicle = new Vehicle();
-        dealership.removeVehicles(vehicle);
+//        Vehicle vehicle = new Vehicle();
+//        dealership.removeVehicles(vehicle);
+//
+//        //updates the inventory back to the csv file
+//        fileManager.saveDealership(dealership);
+
+        int vin = ConsoleHelper.promptForInt("Enter VIN to remove: ");
+
+        // Find the matching vehicle from inventory
+        Vehicle toRemove = null;
+        for (Vehicle v : dealership.getAllVehicles()) {
+            if (v.getVin() == vin) {
+                toRemove = v;
+                break;
+            }
+        }
+
+        if (toRemove != null) {
+            dealership.removeVehicles(toRemove);
+            fileManager.saveDealership(dealership);
+        } else {
+            System.out.println("No vehicle found with VIN: " + vin);
+        }
+
 
     }
 }

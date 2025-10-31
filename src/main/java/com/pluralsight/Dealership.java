@@ -8,7 +8,7 @@ public class Dealership {
     private String address;
     private String phone;
 
-    private ArrayList<Vehicle> inventory = new ArrayList<>();
+    private static ArrayList<Vehicle> inventory = new ArrayList<>();
 
     public Dealership(String name, String address, String phone) {
         this.name = name;
@@ -54,6 +54,10 @@ public class Dealership {
     public void addVehicle(Vehicle vehicle){
         inventory.add(vehicle);
 
+    }
+
+    public static ArrayList<Vehicle> getInventory() {
+        return inventory;
     }
 
     public ArrayList<Vehicle> getAllVehicles(){

@@ -1,5 +1,7 @@
 package com.pluralsight;
 
+import java.util.ArrayList;
+
 public abstract class Contract {
     private String contract_date;
     private String customer_name;
@@ -8,11 +10,15 @@ public abstract class Contract {
     private double total_price;
     private double monthly_payment;
 
+    private Dealership dealership;
+    private ArrayList<Vehicle> inventory_copy;
+
     public Contract(String contract_date, String customer_name, String customer_email, Vehicle vehicle_sold) {
         this.contract_date = contract_date;
         this.customer_name = customer_name;
         this.customer_email = customer_email;
         this.vehicle_sold = vehicle_sold;
+        this.inventory_copy =
     }
 
     public String getContract_date() {

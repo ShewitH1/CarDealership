@@ -36,6 +36,7 @@ public class UserInterface {
                 7) Get all vehicles
                 8) Add a vehicle
                 9) Remove a vehicle
+                10) Create contract
                 0) Exit
                 """;
 
@@ -90,6 +91,9 @@ public class UserInterface {
                     processRemoveVehicleRequest();
                     break;
 
+                case 10:
+                    break;
+
                 case 0:
                     System.out.println("Exiting...");
                     System.exit(0);
@@ -101,6 +105,8 @@ public class UserInterface {
             }
         }
     }
+
+
 
     public void processGetByPriceRequest(){
         double min = ConsoleHelper.promptForDouble("Enter you minimum value for your price: ");

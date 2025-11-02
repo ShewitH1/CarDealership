@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 public class UserInterface {
@@ -36,7 +37,8 @@ public class UserInterface {
                 7) Get all vehicles
                 8) Add a vehicle
                 9) Remove a vehicle
-                10) Create contract
+                10) Sell a vehicle 
+                11) Lease a vehicle
                 0) Exit
                 """;
 
@@ -92,6 +94,13 @@ public class UserInterface {
                     break;
 
                 case 10:
+                    System.out.println("Sell a vehicle!");
+                    processSellVehicleRequest();
+                    break;
+
+                case 11:
+                    System.out.println("Lease a vehicle!");
+                    processLeaseVehicleRequest();
                     break;
 
                 case 0:
@@ -105,6 +114,108 @@ public class UserInterface {
             }
         }
     }
+
+
+    public void processSellVehicleRequest() {
+        dealership.getAllVehicles();
+
+        ContractFileManager contractManager = new ContractFileManager();
+
+        int vin = ConsoleHelper.promptForInt("Enter VIN of the vehicle to sell: ");
+        Vehicle selectedVehicle = null;
+
+        for (Vehicle v : dealership.getAllVehicles()) {
+            if (v.getVin() == vin) {
+                selectedVehicle = v;
+                break;
+            }
+        }
+
+        if (selectedVehicle == null) {
+            System.out.println("Vehicle not found!");
+            return;
+        }
+
+        String customerName = ConsoleHelper.promptForString("Enter customer name: ");
+        String customerEmail = ConsoleHelper.promptForString("Enter customer email: ");
+        String date = ConsoleHelper.promptForString("Enter contract date (YYYY-MM-DD): ");
+        boolean isFinanced = ConsoleHelper.promptForString("Is the vehicle financed? (YES/NO): ").equalsIgnoreCase("YES");
+
+        SalesContract contract = new SalesContract(date, customerName, customerEmail, selectedVehicle, isFinanced);
+
+        // Save the contract
+        contractManager.saveContract(contract);
+
+        // Remove sold vehicle
+        dealership.removeVehicles(selectedVehicle);
+
+        // Update dealership file
+        DealershipFileManager fileManager = new DealershipFileManager();
+        fileManager.saveDealership(dealership);
+
+        System.out.println("Vehicle sold and contract saved successfully!");
+    }
+
+
+
+    public void processLeaseVehicleRequest() {
+        //this just prints out all the vehicles
+        System.out.println(dealership.getAllVehicles());
+
+
+        ContractFileManager contractManager = new ContractFileManager();
+
+       //ask user to enter vin to locate vehicle of choosing
+        int vin = ConsoleHelper.promptForInt("Enter vin of vehicle to lease: ");
+        Vehicle selected_vehicle = null;
+
+//        for (Vehicle v : dealership.getAllVehicles()) {
+//            if (v.getVin() == vin) {
+//                selectedVehicle = v;
+//                break;
+//            }
+//        }
+
+        for(int i = 0; i < dealership.getAllVehicles().size(); i++){
+            Vehicle vin_vehicles = dealership.getAllVehicles().get(i);
+            if(vin_vehicles.getVin() == vin){
+                selected_vehicle = vin_vehicles;
+                break;
+            }
+
+        }
+
+
+
+        //says if selected vehicle is empty/not there - vehicle is not there
+        if (selected_vehicle == null) {
+            System.out.println("Vehicle not found!");
+            return;
+        }
+
+        //asks for user input
+        String contract_date = ConsoleHelper.promptForString("Enter the date: ");
+        String customer_name = ConsoleHelper.promptForString("Enter your name: ");
+        String customer_email = ConsoleHelper.promptForString("Enter your email: ");
+
+        //saves user input into object
+        LeaseContract leaseContract = new LeaseContract(contract_date, customer_name, customer_email, selected_vehicle);
+
+        // Save contract - passes it thru parameter to write to csv
+        ContractFileManager contractFileManager = new ContractFileManager();
+        contractFileManager.saveContract(leaseContract);
+
+        // Remove leased vehicle
+        dealership.removeVehicles(selected_vehicle);
+
+        // Update dealership file
+        DealershipFileManager dealershipFileManager = new DealershipFileManager();
+        dealershipFileManager.saveDealership(dealership);
+
+
+        System.out.println(" Vehicle leased and contract saved successfully!");
+    }
+
 
 
 
